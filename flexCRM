@@ -1,0 +1,43 @@
+# vTigerCRM Download: https://sourceforge.net/projects/vtigercrm/files/vtiger%20CRM%206.4.0/Core%20Product/vtigercrm6.4.0.tar.gz/download
+# GLPI Download: https://github.com/glpi-project/glpi/releases/download/0.90.3/glpi-0.90.3.tar.gz
+FROM ubuntu:trusty
+MAINTAINER Juliano Barbosa: barbosa@flexsolutions.com.br
+RUN apt-get update && apt-get install -y apache2 \
+                vim \
+                wget \
+                ca-certificates \
+                libapache2-mod-php5 \
+                php5 \
+                php5-curl \
+                php5-gd \
+                php5-cli \
+                php5-imap \
+                php-soap \
+                php5-mysql \
+                php5-ldap \
+                php5-xmlrpc \
+                zip \
+                unzip \
+                bzip2 \
+                unrar-free \
+                curl && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN a2enmod rewrite && service apache2 stop
+
+COPY glpi-0.90.3.tar.gz /tmp
+COPY vtigercrm6.4.0.tar.gz /tmp
+COPY glpi.conf /etc/apache2/conf-available
+COPY vtiger.conf /etc/apache2/conf-available
+
+WORKDIR /var/www/html
+
+RUN tar -zxvf /tmp/glpi-0.90.3.tar.gz -C /var/www/html && \
+    tar -zxvf /tmp/vtigercrm6.4.0.tar.gz -C /var/www/html && \
+    usermod -u 1000 www-data
+
+# RUN a2enconf glpi.conf && a2enconf vtiger.conf && service apache2 restart
+
+CMD tail -f /var/log/apache2/*.log
+
+EXPOSE 80

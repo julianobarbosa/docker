@@ -1,0 +1,193 @@
+# GLPI persistent data
+#glpidata:
+  #image: ubuntu
+  #hostname: goxweb01
+  #container_name: goxweb01
+  #domainname: flexsolutions.local
+  #volumes:
+    #- /opt/goxsql01/www/html:/var/www/html
+
+# GLPI container
+#glpi:
+  #image: driket54/glpi
+  #hostname: goxdsk01
+  #domainname: flexsolutions.local
+  #container_name: goxdsk01
+  #ports:
+    #- "8091:80"
+    #- "8092:81"
+    #- "64022:22"
+
+  #links:
+    #- mysql:db
+
+  #env_file:
+    #- ./glpi.env
+
+  #volumes_from:
+    #- glpidata
+
+# Database persistent data
+mysqldata:
+  image: ubuntu
+  container_name: mysqldata
+  volumes:
+    - /opt/goxsql01/db/data:/var/lib/mysql
+
+# Database container
+mysql:
+  image: mariadb
+  hostname: goxsql01
+  domainname: flexsolutions.local
+  container_name: mariadb
+  ports:
+    - "3306:3306"
+
+  env_file:
+    - ./glpi.env
+
+  volumes_from:
+    - mysqldata
+
+# PostgreSQL
+goxpgsql01:
+  image: postgres:9.5
+  hostname: goxpgsql01
+  domainname: flexsolutions.local
+  container_name: goxpgsql01
+  ports:
+    - "5432:5432"
+
+  environment:
+    - POSTGRES_USER=username
+    - POSTGRES_PASSWORD=xxxxxxxxx
+    - PGDATA=/var/lib/postgresql/data/pgdata
+
+  volumes:
+    - /opt/goxpgsql01/db/pgdata:/var/lib/postgresql/data/pgdata
+
+
+# Zabbix container
+zabbix:
+  image: monitoringartist/zabbix-3.0-xxl
+  hostname: goxzbx01
+  domainname: flexsolutions.local
+  container_name: goxzbx01
+  ports:
+    - "8090:80"
+    - "10051:10051"
+  volumes:
+    - /opt/goxzbx01/etc/custom-config:/etc/custom-config
+    - /opt/goxzbx01/etc/zabbix:/usr/local/share/zabbix
+
+  links:
+    - mysql:db
+
+  environment:
+    - ZS_DBHost=db
+    - ZS_DBName=zabbix
+    - ZS_DBUser=username
+    - ZS_DBPassword=xxxxxxxxx
+    - ZS_StartPingers=40
+    - ZS_DebugLevel=4
+    - ZS_StartPollers=20
+    - ZABBIX_ADMIN_EMAIL=barbosa@flexsolutions.com.br
+    - ZABBIX_SMTP_SERVER=smtp.gmail.com:587
+    - ZABBIX_SMTP_USER=myemail
+    - ZABBIX_SMTP_PASS=xxxxxxxxxxxxxxxxxxxxxxx
+    - SLACK_WEBHOOK=
+
+# goxnip01
+goxnip01:
+  image: coppit/no-ip
+  hostname: goxnip01
+  domainname: flexsolutions.local
+  container_name: goxnip01
+  volumes:
+    - /etc/localtime:/etc/localtime
+    - /opt/goxnip01/config:/config
+
+# goxcrm01
+goxcrm01:
+    image: barbosa/flexcrm:1.0
+    hostname: goxcrm01
+    container_name: goxcrm01
+    domainname: flexsolutions.local
+    container_name: goxcrm01
+    # net: "host"
+    ports:
+        - "8093:80"
+    links:
+        - mysql:db
+
+    volumes:
+        - /opt/goxcrm01/www/html:/var/www/html
+
+    extra_hosts:
+        - "goxdsk01.flexsolutions.local goxdsk01:172.17.0.2"
+        - "goxsql01.flexsolutions.local db mariadb:172.17.0.3"
+        - "goxzbx01.flexsolutions.local goxzbx01:172.17.0.4"
+
+# goxjpt01
+goxjpt01:
+    image: xblaster/tensorflow-jupyter
+    hostname: goxjpt01
+    container_name: goxjpt01
+    domainname: flexsolutions.local
+    container_name: goxjpt01
+
+    ports:
+        - "8888:8888"
+
+    volumes:
+        - /opt/goxjpt01/notebook:/notebook
+
+# goxsok01
+goxsok01:
+    image: jarkt/docker-remote-api
+    hostname: goxsok01
+    container_name: goxsok01
+    domainname: flexsolutions.local
+    container_name: goxsok01
+
+    ports:
+        - "2375:2375"
+
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+
+# goxspk01
+goxspk01:
+    image: flexsolutions/spark
+    hostname: goxspk01
+    container_name: goxspk01
+    domainname: flexsolutions.local
+    container_name: goxspk01
+
+    ports:
+        - "5222:5222"
+        - "7777:7777"
+        - "9090:9090"
+
+    volumes:
+        - /opt/goxspk01/openfire:/var/lib/openfire
+
+# goxgit01:
+# image: 'gitlab/gitlab-ce:latest'
+# restart: always
+# hostname: 'goxgit01.flexsolutions.local'
+# environment:
+# GITLAB_OMNIBUS_CONFIG: |
+# external_url 'https://gitlab.flexsolutions.com.br:8094'
+# gitlab_rails['gitlab_shell_ssh_port'] = 64022
+# # Add any other gitlab.rb configuration here, each on its own line
+# 
+# ports:
+# - '8094:80'
+# - '8443:443'
+# - '64022:22'
+# 
+# volumes:
+# - '/opt/goxgit01/config:/etc/gitlab'
+# - '/opt/goxgit01/logs:/var/log/gitlab'
+# - '/opt/goxgit01/data:/var/opt/gitlab'
