@@ -34,3 +34,7 @@ docker rm $(docker ps -a -q)
 docker rmi $(docker images -q)
 ```
 
+# Build Image
+```console
+docker build -t flexsolutions/pentaho:v1 .
+```
