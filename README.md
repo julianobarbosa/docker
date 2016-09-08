@@ -41,7 +41,7 @@ docker build -t flexsolutions/pentaho:v1 .
 
 # Show IP Address
 <pre>
-docker inpspect --format '{{ .NetworkSettings.IPAddress }}' <container>
+docker inspect --format '{{ .NetworkSettings.IPAddress }}' container
 </pre>
 # Show ports Redirec
 <pre>
