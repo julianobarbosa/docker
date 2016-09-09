@@ -1,43 +1,43 @@
 # Docker bash autocomplete
-```console
+<pre>
 curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose
-```
+</pre>
 
 # Docker zsh autocomplete
-```console
+<pre>
 mkdir -p ~/.zsh/completion
 curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/zsh/_docker-compose > ~/.zsh/completion/_docker-compose
-```
+</pre>
 
 # Docker Information
-```console
+<pre>
 docker info
-```
+<pre>
 
 # Docker Version
-```console
+<pre>
 docker version
-```
+</pre>
 
 # Remove docker Images
-```console
+<pre>
 docker rmi $(docker images | grep "^<none>" | awk ‘{print $3}’)
-```
+</pre>
 
 # Delete all docker containers
-```console
+<pre>
 docker rm $(docker ps -a -q)
-```
+</pre>
 
 # Delete all Docker Images
-```console
+<pre>
 docker rmi $(docker images -q)
-```
+</pre>
 
 # Build Image
-```console
+<pre>
 docker build -t flexsolutions/pentaho:v1 .
-```
+</pre>
 
 # Show IP Address
 <pre>
@@ -46,4 +46,9 @@ docker inspect --format '{{ .NetworkSettings.IPAddress }}' container
 # Show ports Redirec
 <pre>
 
+</pre>
+
+# Commit update
+<pre>
+docker commit <container> flexsolutions/flexcrm:1.0
 </pre>
