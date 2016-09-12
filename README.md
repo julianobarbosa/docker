@@ -23,6 +23,12 @@ docker version
 <pre>
 docker rmi $(docker images | grep "^<none>" | awk ‘{print $3}’)
 </pre>
+<pre>
+docker images -q | xargs docker rmi
+</pre>
+<pre>
+docker rmi $(docker ps -q)
+</pre>
 
 # Delete all docker containers
 <pre>
