@@ -34,7 +34,7 @@ goxpgsql01:
 
   environment:
     - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=7a82d8fdae
+    - POSTGRES_PASSWORD=xxxxxxxxxxxxxxxxxxxxxxxxx
     - PGDATA=/var/lib/postgresql/data/pgdata
 
   volumes:
@@ -63,8 +63,8 @@ goxpen01:
     - PGDATABASE=pentaho
     - PGUSER=postgres
     - POSTGRES_USER=postgres
-    - PGPASSWORD=7a82d8fdae
-    - POSTGRES_PASSWORD=7a82d8fdae
+    - PGPASSWORD=xxxxxxxxxxx
+    - POSTGRES_PASSWORD=xxxxxxxxxx
     - PGDATA=/var/lib/postgresql/data/pgdata
 
   extra_hosts:
@@ -104,7 +104,7 @@ zabbix:
     - ZABBIX_ADMIN_EMAIL=barbosa@flexsolutions.com.br
     - ZABBIX_SMTP_SERVER=smtp.gmail.com:587
     - ZABBIX_SMTP_USER=barbosa@flexsolutions.com.br
-    - ZABBIX_SMTP_PASS=mwsowcefvewylzwg
+    - ZABBIX_SMTP_PASS=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     - SLACK_WEBHOOK=https://hooks.slack.com/services/QQ3PTH/B67THC0D3/ABCDGabcDEF124
 
 # goxnip01
