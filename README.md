@@ -52,6 +52,8 @@ docker build -t flexsolutions/pentaho:v1 .
 docker inspect --format '{{ .NetworkSettings.IPAddress }}' container
 
 docker inspect 'CONTAINERID' | grep -w "IPAddress" | awk '{ print $2 }' | head -n 1 | cut -d "," -f1 
+
+docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq)
 </pre>
 
 # Show ports Redirec
