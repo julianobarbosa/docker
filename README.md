@@ -12,7 +12,7 @@ curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose versio
 # Docker Information
 <pre>
 docker info
-<pre>
+</pre>
 
 # Docker Version
 <pre>
@@ -21,11 +21,13 @@ docker version
 
 # Remove docker Images
 <pre>
-docker rmi $(docker images | grep "^<none>" | awk ‘{print $3}’)
+docker rmi $(docker images | grep "^\<none\>" | awk ‘{print $3}’)
 </pre>
+
 <pre>
 docker images -q | xargs docker rmi
 </pre>
+
 <pre>
 docker rmi $(docker ps -q)
 </pre>
@@ -53,9 +55,6 @@ docker inspect 'CONTAINERID' | grep -w "IPAddress" | awk '{ print $2 }' | head -
 </pre>
 
 # Show ports Redirec
-<pre>
-
-</pre>
 
 # Commit update
 <pre>
