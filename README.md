@@ -77,6 +77,11 @@ b8eng5t9qnrgzwkzq7jvvxe73    host02    Ready   Active
 mq30v4fy2qrjwym47lywkdiav *  host01    Ready   Active        Leader
 ```
 
+## Swarm: Network
+```console
+> docker network create -d overlay skynet
+poxwtz4ovzi27pkkb41s9cuzy
+```
 
 # Show ports Redirec
 
