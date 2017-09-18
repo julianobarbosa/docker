@@ -70,7 +70,7 @@ alias dclean='docker ps -a | grep -v '\''CONTAINER\|_config\|_data\|_run'\'' | c
 
 ## Update
 ```console
-curl -L assets.joinscrapbook.com/docker/dockerd-17-05 -o dockerd
-mv dockerd /usr/bin/dockerd && chmod +x /usr/bin/dockerd
+> curl -L assets.joinscrapbook.com/docker/dockerd-17-05 -o dockerd
+> mv dockerd /usr/bin/dockerd && chmod +x /usr/bin/dockerd
 ```
 
