@@ -66,3 +66,11 @@ docker commit <container> flexsolutions/flexcrm:1.0
 # Aliases
 alias diclean='docker images | grep '\''<none>'\'' | grep -P '\''[1234567890abcdef]{12}'\'' -o | xargs -L1 docker rmi'
 alias dclean='docker ps -a | grep -v '\''CONTAINER\|_config\|_data\|_run'\'' | cut -c-12 | xargs docker rm'
+
+
+## Update
+```console
+curl -L assets.joinscrapbook.com/docker/dockerd-17-05 -o dockerd
+mv dockerd /usr/bin/dockerd && chmod +x /usr/bin/dockerd
+```
+
