@@ -86,6 +86,7 @@ poxwtz4ovzi27pkkb41s9cuzy
 ## Swarm: Service
 ```console
 > docker service create --name http --network skynet --replicas 2 -p 80:80 katacoda/docker-http-server
+> docker service ps http
 ```
 
 # Show ports Redirec
