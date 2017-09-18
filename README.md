@@ -83,6 +83,11 @@ mq30v4fy2qrjwym47lywkdiav *  host01    Ready   Active        Leader
 poxwtz4ovzi27pkkb41s9cuzy
 ```
 
+## Swarm: Service
+```console
+> docker service create --name http --network skynet --replicas 2 -p 80:80 katacoda/docker-http-server
+```
+
 # Show ports Redirec
 
 # Commit update
