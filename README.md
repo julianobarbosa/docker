@@ -63,9 +63,18 @@ docker ps -q | xargs docker inspect --format '{{ .Id }} - {{ .Name }} - {{ .Netw
 ```console
 token=$(docker -H 172.17.0.3:2345 swarm join-token -q worker) && echo $token
 ```
+
 ## Swarm: Connect
 ```console
 docker swarm join 172.17.0.3:2377 --token $token
+```
+
+## Swarm: Query
+```console
+> docker node ls
+ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
+b8eng5t9qnrgzwkzq7jvvxe73    host02    Ready   Active
+mq30v4fy2qrjwym47lywkdiav *  host01    Ready   Active        Leader
 ```
 
 
