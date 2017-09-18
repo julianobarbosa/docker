@@ -56,6 +56,12 @@ docker inspect 'CONTAINERID' | grep -w "IPAddress" | awk '{ print $2 }' | head -
 docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq)
 </pre>
 
+```console
+docker ps -q | xargs docker inspect --format '{{ .Id }} - {{ .Name }} - {{ .NetworkSettings.IPAddress }}'
+```
+
+
+
 # Show ports Redirec
 
 # Commit update
