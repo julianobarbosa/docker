@@ -47,6 +47,10 @@ docker rmi $(docker images -q)
 docker build -t flexsolutions/pentaho:v1 .
 </pre>
 
+```console
+docker build -t flexsolutions/flexdas:v1.0.1 .
+```
+
 # Show IP Address
 <pre>
 docker inspect --format '{{ .NetworkSettings.IPAddress }}' container
