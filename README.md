@@ -51,6 +51,11 @@ docker build -t flexsolutions/pentaho:v1 .
 docker build -t flexsolutions/flexdas:v1.0.1 .
 ```
 
+# Docker Volume
+```console
+docker volume inspect --format '{{ .Mountpoint }}' repo
+```
+
 # Show IP Address
 <pre>
 docker inspect --format '{{ .NetworkSettings.IPAddress }}' container
