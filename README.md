@@ -116,3 +116,22 @@ alias dclean='docker ps -a | grep -v '\''CONTAINER\|_config\|_data\|_run'\'' | c
 > mv dockerd /usr/bin/dockerd && chmod +x /usr/bin/dockerd
 ```
 
+## List all containers (only IDs)
+```console
+docker ps -aq
+```
+
+## Stop all running containers
+```console
+docker stop $(docker ps -aq)
+```
+
+## Remove all containers
+```console
+docker rm $(docker ps -aq)
+```
+
+## Remove all images
+```console
+docker rmi $(docker images -q)
+```
